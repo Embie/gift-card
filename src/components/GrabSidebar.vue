@@ -1,6 +1,6 @@
 <template>
   <div class="brand-wrapper">
-    <!--Brand logo and name section-->
+    <!--Brand logo and name part-->
     <div class="section">
       <!--Brand logo -->
       <div class="columns brand-logo">
@@ -23,7 +23,7 @@
       </div>
     </div>
     <hr class="divider" />
-    <!--Feature details -->
+    <!--Brand feature details part-->
     <div class="columns brand-feature-details">
       <div class="column is-6">
         <div class="feature-details-label">Country</div>
@@ -40,7 +40,7 @@
       </div>
     </div>
     <hr class="divider" />
-    <!--Details etails -->
+    <!--Brand details part-->
     <div class="section">
       <div class="columns brand-details">
         <div class="column is-6">
@@ -70,7 +70,7 @@
       </div>
     </div>
     <hr class="divider" />
-    <!--Keywords  -->
+    <!--Brand keywords part -->
     <div class="keywords">
       <div class="columns">
         <div class="column is-5">
@@ -100,7 +100,7 @@
       </div>
     </div>
     <hr class="divider" />
-    <!--Icons -->
+    <!--Brand icons part-->
     <div class="icons-section margin-bottom-10">
       <div class="columns">
         <div class="column is-3">

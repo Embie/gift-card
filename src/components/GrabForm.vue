@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="submitForm" class="wrapper">
-    <!--Gift amount  wrapper-->
-    <div class="section">
+    <!--Gift amount  part-->
+    <div class="part">
       <div class="columns">
         <div class="column is-3">
           <h2>Gift information</h2>
@@ -9,7 +9,7 @@
       </div>
       <div class="columns">
         <div class="column is-3">
-          <h3>Select gift amount</h3>
+          <h3 class="bold">Select gift amount</h3>
         </div>
       </div>
       <!--Gift amount -->
@@ -56,7 +56,7 @@
               class="amount"
               v-on:click="selectAmount('custom', true)"
               v-bind:class="
-                form.isAmountShowed == true ? 'is-info' : 'outlined'
+                form.isCustomAmount == true ? 'is-info' : 'outlined'
               "
             >
               custom
@@ -65,7 +65,7 @@
         </div>
       </div>
       <!--Gift Custom amount -->
-      <div class="columns" v-if="form.isAmountShowed">
+      <div class="columns" v-if="form.isCustomAmount">
         <div class="column is-5">
           <b-field label="" type="is-light">
             <b-input
@@ -76,7 +76,7 @@
             ></b-input>
           </b-field>
           <div
-            v-if="!this.order.amount && form.isSubmitted && form.isAmountShowed"
+            v-if="!this.order.amount && form.isSubmitted && form.isCustomAmount"
             class="error"
           >
             *Please enter sender name
@@ -84,9 +84,9 @@
         </div>
       </div>
     </div>
-    <!--Delivery type wrapper-->
-    <div class="section">
-      <!--Delivery type -->
+    <!--Delivery type part-->
+    <div class="part">
+      <!--Delivery types-->
       <div class="delivery-type">
         <div class="columns">
           <div class="column is-3">
@@ -118,7 +118,7 @@
           </div>
         </div>
       </div>
-      <!--show if delivery time send as gift -->
+      <!--show if delivery time is send as gift -->
       <div v-if="order.deliveryType == 'Send as gift'">
         <div class="columns">
           <div class="column is-6">
@@ -126,6 +126,7 @@
               <b-input
                 placeholder="Enter sender name"
                 v-model="order.senderName"
+                type="text"
               ></b-input>
             </b-field>
             <div v-if="!order.senderName && form.isSubmitted" class="error">
@@ -137,6 +138,7 @@
               <b-input
                 placeholder="Enter recipient name"
                 v-model="order.recipientName"
+                type="text"
               ></b-input>
             </b-field>
             <div v-if="!order.recipientName && form.isSubmitted" class="error">
@@ -153,6 +155,7 @@
               <b-input
                 placeholder="Enter recipient email"
                 v-model="order.recipientEmail"
+                type="email"
               ></b-input>
             </b-field>
             <div v-if="!order.recipientEmail && form.isSubmitted" class="error">
@@ -164,6 +167,7 @@
               <b-input
                 placeholder="Enter recipient phone"
                 v-model="order.recipientPhone"
+                type="text"
               ></b-input>
             </b-field>
             <div v-if="!order.recipientPhone && form.isSubmitted" class="error">
@@ -173,10 +177,11 @@
         </div>
       </div>
     </div>
-    <div class="section">
+     <!--Delivery type part-->
+    <div class="part">
       <div class="columns">
         <div class="column is-3">
-          <h3 class="text-align-left">Delivery time</h3>
+          <h3 class="text-align-left bold">Delivery time</h3>
         </div>
       </div>
       <!--Delivery time types-->
@@ -273,8 +278,8 @@
         </div>
       </div>
     </div>
-    <!--Send button-->
-    <div class="section">
+    <!--Send button part-->
+    <div class="part">
       <div class="columns">
         <div class="column is-12 level-right submit">
           <b-button native-type="submit" type="is-info">SEND</b-button>
@@ -284,7 +289,7 @@
   </form>
 </template>
 <script>
-import { required } from 'vuelidate/lib/validators'
+
 export default {
   name: 'Grab',
   data () {
@@ -302,18 +307,15 @@ export default {
         message: null
       },
       form: {
-        isAmountShowed: false,
+        isCustomAmount: false,
         isSubmitted: false
       }
     }
   },
-  validations: {
-    firstname: { required }
-  },
   methods: {
-    selectAmount: function (amount, isAmountShowed) {
+    selectAmount: function (amount, isCustomAmount) {
       this.order.amount = amount
-      this.form.isAmountShowed = isAmountShowed
+      this.form.isCustomAmount = isCustomAmount
       if (amount === 'custom') {
         this.order.amount = ''
       }
@@ -349,23 +351,12 @@ export default {
   color: #1e2226;
   font-weight: 600;
 }
-h3 {
-  font-size: 14px;
+.wrapper h3 {
+  font-size: 15px;
   color: #3c4044;
   font-weight: bold;
 }
-.brand-data-logo img {
-  max-width: 20% !important;
-}
-.brand-active h2 {
-  text-transform: uppercase;
-  font-weight: bold;
-}
-.vertical-line {
-  width: 1px;
-  height: 60px;
-  background-color: #f0f2f4;
-}
+
 .gift-amount button.amount {
   font-weight: 500;
   min-width: 8px;
@@ -382,17 +373,11 @@ h3 {
   font-weight: 500;
   text-align: left;
 }
-
 .error {
   font-size: 12px;
   color: #f83c5e;
   font-weight: bold;
   text-align: left;
-}
-.submit,
-.submit:hover,
-.submit:active {
-  text-align: right;
 }
 .text-align-left {
   text-align: left;
@@ -400,8 +385,16 @@ h3 {
 .bold {
   font-weight: bold !important;
 }
-.section {
+.part {
   border: 1px solid #fbfbfc !important;
   padding: 10px;
+}
+.vertical-line {
+  width: 1px;
+  height: 60px;
+  background-color: #f0f2f4;
+}
+.submit{
+  text-align: right;
 }
 </style>
